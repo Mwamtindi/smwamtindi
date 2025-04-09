@@ -29,9 +29,9 @@ import sph from "./company/sph.png";
 import future from "./company/future.avif";
 
 
-import sphf from "./sphf.png";
-import passchecker from "./passwd.png";
-import medicare from "./medicare.png";
+// import sphf from "./sphf.png";
+// import passchecker from "./passwd.png";
+// import medicare from "./medicare.png";
 
 export {
   logo,
