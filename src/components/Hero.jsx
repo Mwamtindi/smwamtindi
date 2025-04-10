@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaTwitter, FaBriefcase } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaTwitter, FaBriefcase, FaFileAlt } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
@@ -114,14 +114,17 @@ const Hero = () => {
         </p>
 
         <div className="flex gap-6 mb-6 text-2xl text-green-400">
-          <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://github.com/Mwamtindi" target="_blank" rel="noopener noreferrer" className="hover:text-white">
             <FaGithub />
           </a>
-          <a href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://www.linkedin.com/in/shabani-mwamtindi/" target="_blank" rel="noopener noreferrer" className="hover:text-white">
             <FaLinkedin />
           </a>
-          <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://x.com/Mwamtindi_jnr" target="_blank" rel="noopener noreferrer" className="hover:text-white">
             <FaTwitter />
+          </a>
+          <a href="https://docs.google.com/document/d/14HED8YLiQpBpfLMDz5MJTF_lM-oxSh8ZJLkSjrboTMk/edit?tab=t.0" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+            <FaFileAlt />
           </a>
         </div>
 
