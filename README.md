@@ -24,7 +24,6 @@ This project blends cybersecurity passion with frontend creativity. It features 
 - React.js
 - Three.js
 - React Three Fiber
-- React Three Drei
 - Email JS
 - Vite
 - Tailwind CSS
