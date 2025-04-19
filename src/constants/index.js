@@ -250,6 +250,15 @@ const projects = [
 /** @type {Project[]} */
 const PROJECTSS = [
   {
+    name: "Haji Mukhtar",
+    image: "/projects/hajj.PNG",
+    blurImage: "/projects/blur/dlt-website-blur.jpg",
+    description: "Haji Mukhtar Properties is a real estate website that offers a user-friendly platform for property listings, showcasing properties with detailed descriptions, images, and contact information.",
+    gradient: ["#2F9582", "#2ABCFE"],
+    url: "https://hajjmukthrproperties-syjy.vercel.app/",
+    tech: ["javascript", "next", "tailwind"],
+  },
+  {
     name: "SwahilipotHub",
     image: "/projects/sphf.PNG",
     blurImage: "/projects/blur/figgen-blur.jpg",
