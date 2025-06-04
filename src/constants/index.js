@@ -165,7 +165,7 @@ const educationTimeline = [
   {
     year: "2008 - 2016",
     institution: "Eshu Primary School",
-    degree: "Kenya Certificate of Primary Education (KCSE)",
+    degree: "Kenya Certificate of Primary Education (KCPE)",
   },
 ];
 
