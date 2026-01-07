@@ -153,7 +153,7 @@ const experiences = [
 
 const educationTimeline = [
   {
-    year: "Ongoing ...",
+    year: "2021 - 2025",
     institution: "Kabarak University",
     degree: "Bachelor of Science in Computer Security and Forensics",
   },
