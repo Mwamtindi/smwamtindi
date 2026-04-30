@@ -121,12 +121,24 @@ const technologies = [
 ];
 
 const experiences = [
+    {
+    title: "Data Manager",
+    company_name: "KEMRI-NUITM",
+    icon: future,
+    iconBg: "#383E56",
+    date: "Jan 2026 - Feb 2026",
+    points: [
+      "Collected and managed field data using ODK tools, ensuring accuracy and completeness.",
+      "Maintained organized datasets to support research and reporting processes.",
+      "Collaborated with team members to improve data collection efficiency."
+    ],
+  },  
   {
     title: "Tech Attachee",
     company_name: "Swahilipot Hub",
     icon: sph,
     iconBg: "#E6DEDD",
-    date: "Jan 2025 - present",
+    date: "Jan 2025 - May 2025",
     points: [
       "Built and deployed full-stack web applications using React (Vite), Strapi CMS, TailwindCSS, and deployment platforms like Vercel and Render.",
       "Collaborated in a dynamic tech ecosystem, engaging with cross-functional teams to deliver innovative digital solutions.",
@@ -140,7 +152,7 @@ const experiences = [
     company_name: "Future Interns",
     icon: future,
     iconBg: "#383E56",
-    date: "Jan 2025 - Feb 2025",
+    date: "Jan 2025 - Mar 2025",
     points: [
       "Conducted security testing on sample web applications using tools like OWASP ZAP, Burp Suite, and SQLMap to identify vulnerabilities including SQL injection and XSS.",
       "Led phishing simulation campaigns using Gophish and SET to assess employee awareness and improve organizational security training programs.",
