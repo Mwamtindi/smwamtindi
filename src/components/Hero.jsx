@@ -1,4 +1,3 @@
-juu
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter, FaBriefcase, FaFileAlt } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
