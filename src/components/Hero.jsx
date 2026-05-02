@@ -1,4 +1,4 @@
-
+juu
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaTwitter, FaBriefcase, FaFileAlt } from "react-icons/fa";
 import { Typewriter } from "react-simple-typewriter";
@@ -123,7 +123,7 @@ const Hero = () => {
           <a href="https://x.com/Mwamtindi_jnr" target="_blank" rel="noopener noreferrer" className="hover:text-white">
             <FaTwitter />
           </a>
-          <a href="https://docs.google.com/document/d/14HED8YLiQpBpfLMDz5MJTF_lM-oxSh8ZJLkSjrboTMk/edit?tab=t.0" target="_blank" rel="noopener noreferrer" className="hover:text-white">
+          <a href="https://docs.google.com/document/d/18IpcrUsI_SeESNvcfp8bWeDTR_DK3PSyh-LJPdtaHAo/edit?tab=t.0" target="_blank" rel="noopener noreferrer" className="hover:text-white">
             <FaFileAlt />
           </a>
         </div>
