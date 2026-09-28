@@ -268,7 +268,7 @@ const PROJECTSS = [
     description: "A zero-trust digital audio forensics and threat intelligence suite engineered to parse regional dialects (Coastal Sheng/KiMvita) and secure evidence chains using cryptographic SHA-256 block hashing.",
     gradient: ["#FF3333", "#58A6FF"], 
     url: "https://mwamtindi-sauti-pwani-ai-app-tqh0th.streamlit.app/",
-    tech: ["python", "streamlit", "scikit-learn"],
+    tech: ["python", "streamlit", "scikit"],
   },
   {
     name: "Python Port Scanner",
