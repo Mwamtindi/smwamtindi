@@ -261,15 +261,15 @@ const projects = [
 
 /** @type {Project[]} */
 const PROJECTSS = [
-  {
-name: "Python Port Scanner",
-image: "/projects/tuscanner.PNG",
-blurImage: "/projects/blur/figgen-blur.jpg",
-description: "A Python-based TCP/UDP network port scanner designed for security reconnaissance. It supports multithreaded scanning, service detection, HTTP fingerprinting, banner detection, configurable timeouts, and CSV/JSON scan reports.",
-gradient: ["#1F6582", "#2ABCFE"],
-url: "https://github.com/Mwamtindi/port-scanner",
-tech: ["python"],
-},
+    {
+  name: "Python Port Scanner",
+  image: "/projects/tuscanner.png",
+  blurImage: "/projects/blur/figgen-blur.jpg",
+  description: "A Python-based TCP/UDP network port scanner designed for security reconnaissance. It supports multithreaded scanning, service detection, HTTP fingerprinting, banner detection, configurable timeouts, and CSV/JSON scan reports.",
+  gradient: ["#1F6582", "#2ABCFE"],
+  url: "https://github.com/Mwamtindi/port-scanner",
+  tech: ["python"],
+  },
   {
     name: "Haji Mukhtar",
     image: "/projects/hajj.PNG",
