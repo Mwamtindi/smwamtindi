@@ -261,14 +261,23 @@ const projects = [
 
 /** @type {Project[]} */
 const PROJECTSS = [
-    {
-  name: "Python Port Scanner",
-  image: "/projects/tuscanner.png",
-  blurImage: "/projects/blur/figgen-blur.jpg",
-  description: "A Python-based TCP/UDP network port scanner designed for security reconnaissance. It supports multithreaded scanning, service detection, HTTP fingerprinting, banner detection, configurable timeouts, and CSV/JSON scan reports.",
-  gradient: ["#1F6582", "#2ABCFE"],
-  url: "https://github.com/Mwamtindi/port-scanner",
-  tech: ["python"],
+  {
+    name: "Sauti-Pwani AI",
+    image: "/projects/sauti-pwani.png",
+    blurImage: "/projects/blur/dlt-website-blur.jpg",
+    description: "A zero-trust digital audio forensics and threat intelligence suite engineered to parse regional dialects (Coastal Sheng/KiMvita) and secure evidence chains using cryptographic SHA-256 block hashing.",
+    gradient: ["#FF3333", "#58A6FF"], 
+    url: "https://mwamtindi-sauti-pwani-ai-app-tqh0th.streamlit.app/",
+    tech: ["python", "streamlit", "scikit-learn"],
+  },
+  {
+    name: "Python Port Scanner",
+    image: "/projects/tuscanner.png",
+    blurImage: "/projects/blur/figgen-blur.jpg",
+    description: "A Python-based TCP/UDP network port scanner designed for security reconnaissance. It supports multithreaded scanning, service detection, HTTP fingerprinting, banner detection, configurable timeouts, and CSV/JSON scan reports.",
+    gradient: ["#1F6582", "#2ABCFE"],
+    url: "https://github.com/Mwamtindi/port-scanner",
+    tech: ["python"],
   },
   {
     name: "Haji Mukhtar",
