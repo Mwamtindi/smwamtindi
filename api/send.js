@@ -14,19 +14,21 @@ export default async function handler(req, res) {
         .json({ message: "Please complete all required fields." });
     }
 
-    const apiKey = (process.env.RESEND_API_KEY || "").trim();
-    if (!apiKey) {
-      return res
-        .status(500)
-        .json({ message: "RESEND_API_KEY is missing in Vercel." });
+    const apiKey = (process.env.RESEND_API_KEY || "").trim().replace(/^["']|["']$/g, "");
+    if (!apiKey || !apiKey.startsWith("re_")) {
+      return res.status(500).json({
+        message: `Invalid RESEND_API_KEY format in Vercel (starts with: "${apiKey.slice(0, 4)}"). It must start with "re_".`,
+      });
     }
 
     const response = await fetch("https://resend.com", {
       method: "POST",
+      redirect: "manual",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
-        "User-Agent": "PortfolioContactForm/1.0",
+        Accept: "application/json",
+        "User-Agent": "resend-node:4.0.0",
       },
       body: JSON.stringify({
         from: "Portfolio Contact <onboarding@resend.dev>",
@@ -37,14 +39,20 @@ export default async function handler(req, res) {
       }),
     });
 
+    if (response.status >= 300 && response.status < 400) {
+      return res.status(502).json({
+        message: `Resend redirected (${response.status}) to: ${response.headers.get("location")}`,
+      });
+    }
+
     const rawText = await response.text();
     let data = {};
     try {
       data = JSON.parse(rawText);
     } catch {
-      console.error("Non-JSON response from Resend:", response.status, rawText.slice(0, 200));
+      console.error("Non-JSON response:", response.status, response.url, rawText.slice(0, 200));
       return res.status(502).json({
-        message: `Resend returned status ${response.status} (non-JSON). Check your RESEND_API_KEY in Vercel.`,
+        message: `Unexpected HTML response from ${response.url} (status ${response.status}).`,
       });
     }
 
