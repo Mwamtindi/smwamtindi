@@ -1,3 +1,7 @@
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ message: "Method not allowed" });
@@ -14,40 +18,18 @@ export default async function handler(req, res) {
         .json({ message: "Please complete all required fields." });
     }
 
-    const apiKey = (process.env.RESEND_API_KEY || "")
-      .trim()
-      .replace(/^["']|["']$/g, "");
-
-    if (!apiKey || !apiKey.startsWith("re_")) {
-      return res.status(500).json({
-        message: "Invalid or missing RESEND_API_KEY in Vercel.",
-      });
-    }
-
-    const response = await fetch("https://resend.com", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        "User-Agent": "resend-node:4.0.0",
-      },
-      body: JSON.stringify({
-        from: "Portfolio Contact <onboarding@resend.dev>",
-        to: ["cybertawk@gmail.com"],
-        reply_to: email,
-        subject: `New Portfolio Message from ${name}`,
-        text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
-      }),
+    const { error } = await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: ["cybertawk@gmail.com"],
+      replyTo: email,
+      subject: `New Portfolio Message from ${name}`,
+      text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.error("Resend API error:", data);
-      return res.status(response.status).json({
-        message:
-          data.message || "Unable to send your message. Please try again.",
+    if (error) {
+      console.error("Resend error:", error);
+      return res.status(500).json({
+        message: error.message || "Unable to send your message. Please try again.",
       });
     }
 
