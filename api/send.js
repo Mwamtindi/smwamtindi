@@ -4,12 +4,21 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { name, email, message } = req.body;
+    // Safely parse body whether Vercel pre-parsed it or left it as a string
+    const body =
+      typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
+    const { name, email, message } = body;
 
     if (!name || !email || !message) {
       return res
         .status(400)
         .json({ message: "Please complete all required fields." });
+    }
+
+    if (!process.env.RESEND_API_KEY) {
+      return res
+        .status(500)
+        .json({ message: "Server missing RESEND_API_KEY environment variable." });
     }
 
     const response = await fetch("https://resend.com", {
@@ -31,9 +40,9 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       console.error("Resend API error:", data);
-      return res
-        .status(500)
-        .json({ message: "Unable to send your message. Please try again." });
+      return res.status(response.status).json({
+        message: data.message || "Unable to send your message. Please try again.",
+      });
     }
 
     return res
@@ -41,8 +50,8 @@ export default async function handler(req, res) {
       .json({ message: "Your message has been sent successfully!" });
   } catch (error) {
     console.error("Contact form error:", error);
-    return res
-      .status(500)
-      .json({ message: "Something went wrong. Please try again later." });
+    return res.status(500).json({
+      message: error.message || "Something went wrong. Please try again later.",
+    });
   }
 }
