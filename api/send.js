@@ -4,7 +4,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Safely parse body whether Vercel pre-parsed it or left it as a string
     const body =
       typeof req.body === "string" ? JSON.parse(req.body) : req.body || {};
     const { name, email, message } = body;
@@ -29,7 +28,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         from: "Portfolio Contact <onboarding@resend.dev>",
-        to: ["cybertawk@gmail.com"],
+        to: ["mwamtindishaban@gmail.com"],
         reply_to: email,
         subject: `New Portfolio Message from ${name}`,
         text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
@@ -41,7 +40,8 @@ export default async function handler(req, res) {
     if (!response.ok) {
       console.error("Resend API error:", data);
       return res.status(response.status).json({
-        message: data.message || "Unable to send your message. Please try again.",
+        message:
+          data.message || "Unable to send your message. Please try again.",
       });
     }
 
