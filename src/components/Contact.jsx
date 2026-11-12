@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
 
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
@@ -18,50 +17,45 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { target } = e;
-    const { name, value } = target;
-
+    const { name, value } = e.target;
     setForm({
       ...form,
       [name]: value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    emailjs
-      .send(
-        import.meta.env.VITE_APP_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_APP_EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          to_name: "Shabani Athuman",
-          from_email: form.email,
-          to_email: "mwamtindishaban@gmail.com",
-          message: form.message,
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        import.meta.env.VITE_APP_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setLoading(false);
-          alert("Thank you. I will get back to you as soon as possible.");
+        body: JSON.stringify(form),
+      });
 
-          setForm({
-            name: "",
-            email: "",
-            message: "",
-          });
-        },
-        (error) => {
-          setLoading(false);
-          console.error(error);
+      const data = await response.json();
 
-          alert("Ahh, something went wrong. Please try again.");
-        }
-      );
+      if (!response.ok) {
+        throw new Error(data.message || "Something went wrong.");
+      }
+
+      setLoading(false);
+      alert("Thank you. I will get back to you as soon as possible.");
+
+      setForm({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      setLoading(false);
+      console.error(error);
+      alert(error.message || "Ahh, something went wrong. Please try again.");
+    }
   };
 
   return (
@@ -87,6 +81,7 @@ const Contact = () => {
               name='name'
               value={form.name}
               onChange={handleChange}
+              required
               placeholder="What's your full name?"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
@@ -98,6 +93,7 @@ const Contact = () => {
               name='email'
               value={form.email}
               onChange={handleChange}
+              required
               placeholder="What's your email address?"
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
@@ -109,6 +105,7 @@ const Contact = () => {
               name='message'
               value={form.message}
               onChange={handleChange}
+              required
               placeholder='What you want to say?'
               className='bg-tertiary py-4 px-6 placeholder:text-secondary text-white rounded-lg outline-none border-none font-medium'
             />
@@ -116,6 +113,7 @@ const Contact = () => {
 
           <button
             type='submit'
+            disabled={loading}
             className='bg-tertiary py-3 px-8 rounded-xl outline-none w-fit text-white font-bold shadow-md shadow-primary'
           >
             {loading ? "Sending..." : "Send"}
