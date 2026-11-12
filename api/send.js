@@ -14,16 +14,18 @@ export default async function handler(req, res) {
         .json({ message: "Please complete all required fields." });
     }
 
-    const apiKey = (process.env.RESEND_API_KEY || "").trim().replace(/^["']|["']$/g, "");
+    const apiKey = (process.env.RESEND_API_KEY || "")
+      .trim()
+      .replace(/^["']|["']$/g, "");
+
     if (!apiKey || !apiKey.startsWith("re_")) {
       return res.status(500).json({
-        message: `Invalid RESEND_API_KEY format in Vercel (starts with: "${apiKey.slice(0, 4)}"). It must start with "re_".`,
+        message: "Invalid or missing RESEND_API_KEY in Vercel.",
       });
     }
 
     const response = await fetch("https://resend.com", {
       method: "POST",
-      redirect: "manual",
       headers: {
         Authorization: `Bearer ${apiKey}`,
         "Content-Type": "application/json",
@@ -39,27 +41,13 @@ export default async function handler(req, res) {
       }),
     });
 
-    if (response.status >= 300 && response.status < 400) {
-      return res.status(502).json({
-        message: `Resend redirected (${response.status}) to: ${response.headers.get("location")}`,
-      });
-    }
-
-    const rawText = await response.text();
-    let data = {};
-    try {
-      data = JSON.parse(rawText);
-    } catch {
-      console.error("Non-JSON response:", response.status, response.url, rawText.slice(0, 200));
-      return res.status(502).json({
-        message: `Unexpected HTML response from ${response.url} (status ${response.status}).`,
-      });
-    }
+    const data = await response.json();
 
     if (!response.ok) {
       console.error("Resend API error:", data);
       return res.status(response.status).json({
-        message: data.message || "Unable to send your message. Please try again.",
+        message:
+          data.message || "Unable to send your message. Please try again.",
       });
     }
 
